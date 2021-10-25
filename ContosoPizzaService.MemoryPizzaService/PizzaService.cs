@@ -7,7 +7,7 @@ namespace ContosoPizza.Services
 {
     public class MemoryPizzaService : IPizzaService
     {
-        public string Name => "MemoryPizzaService";
+        public string Name => "MemoryPizzaService"; // Commento Nicola
         protected virtual List<Pizza> Pizzas { get; set; }
         protected virtual int nextId { get; set; } = 3;
         public MemoryPizzaService()
