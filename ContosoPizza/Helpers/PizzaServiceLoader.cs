@@ -14,11 +14,11 @@ namespace ContosoPizza.Helpers
         public static void AddPizzaServiceImplementations(this IServiceCollection services)
         {
             var types = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll").Select(f => Assembly.LoadFrom(f)).ToList()
-                .SelectMany(a => a.GetTypes()
-                    .Where(t => typeof(IPizzaService).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface && t.IsClass && t.IsPublic)
-                )
-                .ToList();
-            
+                           .SelectMany(a => a.GetTypes()
+                               .Where(t => typeof(IPizzaService).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface && t.IsClass && t.IsPublic)
+                           )
+                           .ToList();
+
             if (types.Count == 0)
             {
                 throw new TypeLoadException($"Non è stato trovato alcuna implementazione per IPizzaService.");

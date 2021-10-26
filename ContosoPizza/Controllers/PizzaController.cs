@@ -42,7 +42,7 @@ namespace ContosoPizza.Controllers
         {
             var pizza = _PizzaService.Get(id);
 
-            if(pizza == null)
+            if (pizza == null)
                 return NotFound();
 
             return pizza;
@@ -51,7 +51,7 @@ namespace ContosoPizza.Controllers
         // POST action
         [HttpPost]
         public IActionResult Create(Pizza pizza)
-        {            
+        {
             _PizzaService.Add(pizza);
             return CreatedAtAction(nameof(Create), new { id = pizza.Id }, pizza);
         }
@@ -64,10 +64,10 @@ namespace ContosoPizza.Controllers
                 return BadRequest();
 
             var existingPizza = _PizzaService.Get(id);
-            if(existingPizza is null)
+            if (existingPizza is null)
                 return NotFound();
 
-            _PizzaService.Update(pizza);           
+            _PizzaService.Update(pizza);
 
             return NoContent();
         }

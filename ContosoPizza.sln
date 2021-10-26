@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoPizza", "ContosoPizza\ContosoPizza.csproj", "{15C72E65-C345-43FC-A3CD-97C4B2CBCB15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoPizzaService.Abstraction", "ContosoPizzaService.Abstraction\ContosoPizzaService.Abstraction.csproj", "{2A16C39A-1D80-4280-9C3C-EC0E00FD389A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoPizzaService.Abstraction", "ContosoPizzaService.Abstraction\ContosoPizzaService.Abstraction.csproj", "{2A16C39A-1D80-4280-9C3C-EC0E00FD389A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoPizza.Entities", "ContosoPizza.Entities\ContosoPizza.Entities.csproj", "{FC7C1220-872F-4C53-8748-019465F5A11F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoPizza.Entities", "ContosoPizza.Entities\ContosoPizza.Entities.csproj", "{FC7C1220-872F-4C53-8748-019465F5A11F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoPizzaService.MemoryPizzaService", "ContosoPizzaService.MemoryPizzaService\ContosoPizzaService.MemoryPizzaService.csproj", "{4957B32C-121B-4640-B1C6-B657970A331B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoPizzaService.MemoryPizzaService", "ContosoPizzaService.MemoryPizzaService\ContosoPizzaService.MemoryPizzaService.csproj", "{4957B32C-121B-4640-B1C6-B657970A331B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoPizzaService.DapperPizzaService", "ContosoPizzaService.DapperPizzaService\ContosoPizzaService.DapperPizzaService.csproj", "{6AE749CD-D08B-40E8-A842-B7C877BFF98E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4957B32C-121B-4640-B1C6-B657970A331B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4957B32C-121B-4640-B1C6-B657970A331B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4957B32C-121B-4640-B1C6-B657970A331B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE749CD-D08B-40E8-A842-B7C877BFF98E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE749CD-D08B-40E8-A842-B7C877BFF98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE749CD-D08B-40E8-A842-B7C877BFF98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE749CD-D08B-40E8-A842-B7C877BFF98E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
