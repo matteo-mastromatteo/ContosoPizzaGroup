@@ -4,7 +4,7 @@ using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 
 namespace ContosoPizzaService.DapperPizzaService
@@ -16,6 +16,8 @@ namespace ContosoPizzaService.DapperPizzaService
 
         public DapperPizzaService(IConfiguration configuration)
         {
+            dapperServiceSettings = new DapperPizzaServiceConfiguration();
+
             var section = configuration.GetSection(Name + "Configuration");
             if (!section.Exists())
             {
@@ -30,8 +32,8 @@ namespace ContosoPizzaService.DapperPizzaService
                 using (SqlCommand cmd=new SqlCommand())
                 {
                     conn.Open();
-                    pizza.Id = conn.QuerySingle<int>("Insert into Pizza(Nome, IsGlutenFree) values(@nome,@isGlutenFree);" +
-                        "select scope_identity();", new { nome = pizza.Name, isGlutenFree = pizza.IsGlutenFree });
+                    pizza.Id = conn.QuerySingle<int>("Insert into Pizza(Name, IsGlutenFree) values(@Name,@IsGlutenFree);" +
+                        "select scope_identity();", new { Name = pizza.Name, IsGlutenFree = pizza.IsGlutenFree });
 
                 }
             }
@@ -72,7 +74,7 @@ namespace ContosoPizzaService.DapperPizzaService
         {
             using (SqlConnection conn = new SqlConnection(dapperServiceSettings.ConnectionString))
             {
-                conn.Execute("Update Pizza set Nome=@Nome, isGlutenFree=@IsGlutenFree where id=@Id",
+                conn.Execute("Update Pizza set Name=@Name, IsGlutenFree=@IsGlutenFree where id=@Id",
                     pizza);
             }
         }
