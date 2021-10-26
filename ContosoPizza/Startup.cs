@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ContosoPizza.Abstraction;
+using ContosoPizza.Factories;
 using ContosoPizza.Helpers;
-using ContosoPizza.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,20 +28,13 @@ namespace ContosoPizza
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContosoPizza", Version = "v1" });
             });
-
-            services.AddScoped<IMovieRatingProvider, OptimisticMovieRatingProvider>();
-            //services.AddSingleton<IMovieRatingProvider, MovieRatingProvider>();
-
-            var pizzaServiceName = Configuration.GetValue<string>("PizzaServiceName");
-
-            services.AddPizzaServiceImplementations(pizzaServiceName);
-            services.AddScoped<IEventProvider, EventProvider>();
+            services.AddPizzaServiceImplementations();
+            services.AddScoped<IPizzaServiceFactory, PizzaServiceFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

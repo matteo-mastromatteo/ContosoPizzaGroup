@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using ContosoPizza.Models;
 using ContosoPizzaService.Abstraction;
 using ContosoPizza.Entities.Models;
+using ContosoPizza.Abstraction;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace ContosoPizza.Controllers
 {
@@ -11,11 +14,21 @@ namespace ContosoPizza.Controllers
     [Route("[controller]")]
     public class PizzaController : ControllerBase
     {
+        protected readonly IPizzaServiceFactory _PizzaServiceFactory;
+        protected readonly IConfiguration _Configuration;
         protected readonly IPizzaService _PizzaService;
 
-        public PizzaController(IPizzaService pizzaService)
+        public PizzaController(IPizzaServiceFactory pizzaServiceFactory, IConfiguration configuration)
         {
-            _PizzaService = pizzaService;
+            _PizzaServiceFactory = pizzaServiceFactory;
+            _Configuration = configuration;
+
+            var pizzaServiceName = _Configuration.GetValue<string>("PizzaServiceName");
+            if (pizzaServiceName == null)
+            {
+                throw new ArgumentNullException("Manca la chiave di confgurazione PizzaServiceName.");
+            }
+            _PizzaService = pizzaServiceFactory.GetPizzaService(pizzaServiceName);
         }
 
         // GET all action

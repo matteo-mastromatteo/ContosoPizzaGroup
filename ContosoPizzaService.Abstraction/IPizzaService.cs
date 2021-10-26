@@ -17,5 +17,6 @@ namespace ContosoPizzaService.Abstraction
         void Delete(int id);
 
         void Update(Pizza pizza);
+
     }
 }

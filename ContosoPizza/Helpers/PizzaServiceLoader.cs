@@ -11,22 +11,20 @@ namespace ContosoPizza.Helpers
 {
     public static class PizzaServiceLoader
     {
-        public static void AddPizzaServiceImplementations(this IServiceCollection services, string pizzaServiceName)
+        public static void AddPizzaServiceImplementations(this IServiceCollection services)
         {
-            var typ = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll").Select(f => Assembly.LoadFrom(f)).ToList()
+            var types = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll").Select(f => Assembly.LoadFrom(f)).ToList()
                 .SelectMany(a => a.GetTypes()
-                    .Where(t => typeof(IPizzaService).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface && t.IsClass && t.IsPublic && t.Name.ToLower() == pizzaServiceName.ToLower())
+                    .Where(t => typeof(IPizzaService).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface && t.IsClass && t.IsPublic)
                 )
-                .FirstOrDefault();
+                .ToList();
+            
+            if (types.Count == 0)
+            {
+                throw new TypeLoadException($"Non è stato trovato alcuna implementazione per IPizzaService.");
+            }
 
-            if (typ != null)
-            {
-                services.AddSingleton(typeof(IPizzaService), typ);
-            }
-            else
-            {
-                throw new TypeLoadException($"Il tipo {pizzaServiceName} non è stato trovato in nessuno degli assembly presenti.");
-            }
+            types.ForEach(t => services.AddSingleton(typeof(IPizzaService), t));
         }
     }
 }
